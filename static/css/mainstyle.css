@@ -1,0 +1,140 @@
+:root {
+    --background:#363C49;
+    --text: #ffffff;
+    --gray: #464E5E;
+    --blue: #76838A;
+  }
+
+html {
+    background-image: url("/static/backgrounds/daylight.svg");
+}
+
+
+
+h1 {
+    color: var(--text);
+    font-family: 'Source Sans pro', sans-serif;
+    font-weight: 300;
+    text-align: center;
+    font-size: 35px;
+}
+h2 {
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    text-align: right;
+    font-weight: 300;
+    float: left;
+}
+h3 {
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 25px;
+    padding-left: 10px;
+}
+
+.location-header {
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 20px 0;
+}
+.location-icon {
+    height: 60px;
+    float: right;
+    padding-left: 10px;
+}
+
+.daylight-container {
+    display: flex;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    gap: 50px;
+}
+.daylight-icon {
+    width: 60px;
+}
+
+.today-container {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    text-align: center;
+    line-height: 80%;
+    align-content: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.form {
+    margin: auto;
+    width: 40%;
+    background: var(--gray);
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.form-container {
+    margin: auto;
+    width: 80%;
+    background: var(--blue);
+    box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+.form-element {
+    background-color: white;
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+.card-blue {
+    background: var(--blue);
+    box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
+    border-radius: 10px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+.grid-container {
+    margin: auto;
+    width: 80%;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: max-content;
+    gap: 0px 30px;
+    grid-template-areas:
+      "Icon Main Main"
+      "Additional-info Daylight Location"
+      "Today Today Today";
+  }
+  
+.Main { grid-area: Main; }
+
+.Location { grid-area: Location; }
+
+.Today { grid-area: Today; }
+
+.Daylight { grid-area: Daylight; }
+
+.Additional-info { grid-area: Additional-info; }
+  
+.Icon { grid-area: Icon; align-self: center; justify-self: center;}
+
+.weather-icon {
+    height: 200px;
+}
+
+.toggle-mode {
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Weather</title>
+  <link rel="stylesheet" href="static\css\mainstyle.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+
+<body>
+
+    <div>
+        <h1>WEATHER</h1>
+
+        <div class="location-header">
+            <h2>{{data.city}}, {{data.country_code}}</h2>
+            <img src="{{data.icon_filename}}" class="location-icon">
+        </div>
+    </div>
+
+
+    <form method="post" class="form-container">
+        <input type="text" class="form-element" name="city" placeholder="Find the weather in...">
+        <button class="form-element" type="submit">Search</button>
+    </form>
+    
+
+    <div class="grid-container">
+
+        <div class="Icon">
+            <img src="{{data.weather_icon}}" class="weather-icon">
+
+        </div>
+
+        <div class="Main">
+            <div class="card-blue">
+                <h1>Main</h1>
+                <h3>{{data.temp_c}}°C</h3>
+                <h3>{{data.weather}}</h3>
+                <h3>Wind: {{data.windspeed}}mph</h3>
+            </div>
+        </div>
+
+        <div class="Location">
+            <div class="card-blue">
+                <h1>Location</h1>
+                <h3>City: {{data.city}}</h3>
+                <h3>Country code: {{data.country_code}}</h3>
+                <h3>Coordinates: {{data.coordinates}}</h3>
+            </div>
+        </div>
+
+        
+
+        <div class="Additional-info">
+            <div class="card-blue">
+                <h1>Additional info</h1>
+                <h3>Pressure : {{data.pressure}} </h3>
+                <h3>Humidity : {{data.humidity}}%</h3>
+                <h3>Temp: {{data.temp_c}}°C</h3>
+            </div>
+        </div>    
+
+        <div class="Daylight">
+                <div class="card-blue">
+                    <h1>Daylight (GMT)</h1>
+                    <div class="daylight-container">
+                        <div>
+                            <h3>{{data.sunrise}}</h3>
+                            <img src="static\weather_icons\sunrise.png" class="daylight-icon">
+                        </div>
+                        <div>
+                            <h3>{{data.sunset}}</h3>
+                            <img src="static\weather_icons\sunset.png" class="daylight-icon">
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="Today">
+                <div class="card-blue">
+                    <h1>Next 24hrs</h1>
+                    <h3>Temperature (°C)</h3>
+                    <div class="today-container">
+                        <canvas id="chart_temp" width=1000px height=150px></canvas>
+                    </div>
+                    
+                    <h3>Wind (mph)</h3>
+                    <div class="today-container">
+                        <canvas id="chart_wind" width=1000px height=150px></canvas>
+                    </div>
+
+                    </div>
+                </div>
+            </div>       
+    </div>
+
+    
+
+    <button id="myBtn" class='toggle-mode' onclick=myFunction_set()>Toggle mode</button>
+
+    
+
+    <script>
+        // Global parameters:
+        Chart.defaults.global.responsive = true;
+        Chart.defaults.global.defaultFontColor = "#000";
+
+        // Temp chart data
+        var chartData_temp = {
+        labels : [{% for item in labels %}
+        "{{item}}",
+        {% endfor %}],
+        datasets : [{
+        label: '{{ legend }}',
+        fill: true,
+        lineTension: 0.3,
+        backgroundColor: "rgba(75,192,192,0.4)",
+        borderColor: "rgba(75,192,192,1)",
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: "rgba(75,192,192,1)",
+        pointBackgroundColor: "#fff",
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data : [{% for item in tempdata %}
+        {{item}},
+        {% endfor %}],
+        spanGaps: false
+        }]
+        }
+
+        // Wind chart data
+        var chartData_wind = {
+        labels : [{% for item in labels %}
+        "{{item}}",
+        {% endfor %}],
+        datasets : [{
+        label: '{{ legend }}',
+        fill: true,
+        lineTension: 0.3,
+        backgroundColor: "rgba(75,192,192,0.4)",
+        borderColor: "rgba(75,192,192,1)",
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: "rgba(75,192,192,1)",
+        pointBackgroundColor: "#fff",
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data : [{% for item in winddata %}
+        {{item}},
+        {% endfor %}],
+        spanGaps: false
+        }]
+        }
+
+        // create the temp chart using the chart canvas
+        var ctx = document.getElementById("chart_temp").getContext("2d");
+        var chart_temp = new Chart(ctx, {
+        type: 'line',
+        data: chartData_temp,
+        options: {
+            legend: {
+            display: false
+        }
+        }
+        });
+        
+        // create the wind chart using the chart canvas
+        var ctx = document.getElementById("chart_wind").getContext("2d");
+        var chart_wind = new Chart(ctx, {
+        type: 'line',
+        data: chartData_wind,
+        options: {
+            legend: {
+            display: false
+        }
+        }
+        });
+    </script>
+    
+    <script src="static\scripts.js"></script>
+</body>
+
+</html>

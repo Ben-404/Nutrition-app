@@ -1,0 +1,182 @@
+:root {
+    --background:#EBEBEB;
+    --sidebar: #ffffff;
+    --card: #ffffff;
+    --text: #000000;
+    --gray: #464E5E;
+    --blue: #76838A;
+  }
+
+
+
+h1 {
+    color: var(--text);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 40px;
+    text-align: left;
+}
+h2 {
+    color: var(--text);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    text-align: left;
+}
+h3 {
+    padding-top: 15px;
+    color: var(--text);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 25px;
+}
+h4 {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 28px;
+    text-shadow: 2px 2px 2px #000;
+}
+.form-text {
+    color: var(--text);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.sidebar {
+    height: 100%;
+    width: 20%;
+    position: fixed; 
+    top: 0;
+    left: 0;
+
+    background-color: var(--sidebar);
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+}
+.main-body {
+    height: 100%;
+    width: 80%;
+    position: fixed; 
+    top: 0;
+    right: 0;
+
+    background-color: var(--background);
+}
+
+
+
+.form-container {
+    padding-top: 175px;
+    margin: auto;
+    width: 280px;
+
+    display: flex;
+    flex-direction: column;
+    line-height: 0px;
+}
+.form-input {
+    background: var(--sidebar);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-bottom: 5px;
+}
+.form-button {
+    background: var(--sidebar);
+    margin-top: 5px;
+}
+
+.main-container {
+    padding-top: 25px;
+    width: 200px;
+    margin: auto;
+    text-align: center;
+
+    line-height: 5px;
+}
+.weather-icon {
+    height: 170px;
+    padding-bottom: 15px;
+}
+.location {
+    text-align: center;
+    position: relative;
+    height: 100px;
+    width: 280px;
+    margin: auto;
+}
+.location-image {
+    width: inherit;
+    height: inherit;
+    border-radius: 15px;
+    object-fit: cover;
+}
+.location-text {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+.card {
+    text-align: center;
+    height: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 15px;
+    background-color: var(--card);
+}
+
+.card-img {
+    padding-top: 15px;
+    padding-left: 15px;
+    float: left;
+    width: 50px;
+}
+
+.grid-container-highlights {
+    margin: auto;
+    height: 40%;
+    width: 90%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-auto-rows: auto;
+    gap: 25px 25px;
+    grid-template-areas:
+    "temp wind pressure"
+    "visibility daylight humidity";
+}
+
+.temp { grid-area: temp; }
+
+.wind { grid-area: wind; }
+
+.pressure { grid-area: pressure; }
+
+.visibility { grid-area: visibility; }
+
+.daylight { grid-area: daylight; }
+
+.humidity { grid-area: humidity; }
+  
+
+.today-container {
+    width: 70%;
+    margin: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 25px 25px;
+}
+
+.ct-series-a .ct-line {
+    /* Set the colour of this series line */
+    stroke: blue;
+    /* Control the thikness of your lines */
+    stroke-width: 4px;
+}

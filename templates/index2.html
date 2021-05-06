@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Weather</title>
+  <link rel="stylesheet" href="static\css\mainstyle2.css">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+  <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+  <script src="static\scripts.js"></script>
+  
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="location">
+            <h4 class="location-text">{{data.city}},{{data.country_code}}</h4>
+            <img src="{{photodata.url}}" class="location-image">
+        </div>
+        
+        <div class="main-container">
+            <img src="{{data.weather_icon}}" class="weather-icon">
+            <h1>{{data.temp_c}}°C</h1>
+            <h2>{{data.weather}}</h2>
+            <br>
+        </div>
+        
+        <form method="post" class="form-container">
+            <p class="form-text">City (required)</p>
+            <input type="text" class="form-input" name="city" placeholder="E.g. London">
+            <p class="form-text">Country (optional)</p>
+            <input type="text" class="form-input" name="country" placeholder="E.g. UK">
+            <button class="form-button" type="submit">Search</button>
+        </form>
+    </div>
+
+
+
+    <div class="main-body">
+        <h2>Today's highlights</h2>
+        <div class="grid-container-highlights">
+
+            <div class="temp">
+                <div class="card">
+                    <img class="card-img" src="static\weather_icons\temp.png">
+                    <h3>{{data.temp_c}}°C</h3>
+                </div>
+            </div>
+
+            <div class="wind">
+                <div class="card">
+                    <img class="card-img" src="static\weather_icons\wind.png">
+                    <h3>{{data.windspeed}}mph</h3>
+                </div>
+            </div>
+
+            <div class="pressure">
+                <div class="card">
+                    <img class="card-img" src="static\weather_icons\pressure.png">
+                    <h3>{{data.pressure}} hPa</h3>
+                </div>
+            </div>
+
+            <div class="visibility">
+                <div class="card">
+                    <img class="card-img" src="static\weather_icons\visibility.png">
+                    <h3>visibility</h3>
+                </div>
+            </div>
+
+            <div class="daylight">
+                <div class="card">
+                    <img class="card-img" src="static\weather_icons\sunrise.png">
+                    <h3>{{data.sunrise}} ➞ {{data.sunset}}</h3>
+                </div>
+            </div>
+
+            <div class="humidity">
+                <div class="card">
+                    <img class="card-img" src="static\weather_icons\humidity.png">
+                    <h3>{{data.humidity}}%</h3>
+                </div>
+            </div>
+
+        </div>
+
+        <button id="myBtn" class='toggle-mode' onclick=myFunction_set()>Toggle mode</button>
+
+
+        <h2>Next 24hrs</h2>
+
+        <div class="today-container">
+            <div class="card" style="width: 50%;" id="temp-chart">
+                <div class="ct-chart ct-major-tenth"></div>
+                <script src="static\chartscript.js"></script>
+            </div>
+            <div class="card" style="width: 50%;" id="wind-chart">
+                <div class="ct-chart ct-major-tenth"></div>
+                <script src="static\chartscript.js"></script>
+            </div>
+        </div>
+        
+       
+    </div>
+
+    
+</body>
+
+</html>
